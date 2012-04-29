@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Back to the bone</title>
+    </head>
+
+    <body>
+        <button id='add-friend'>Add friend</button>
+        <ul id='friends-list'>
+        </ul>
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+        <script src='http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js'></script>
+        <script src='http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js'></script>
+        <script>
+            (function ($){
+                Friend = Backbone.Model.extend({
+                    name: null
+                });
+                Friends = Backbone.Collection.extend({
+                    initialize: function(models, options){
+                        this.bind('add', options.view.addFriendLi);
+                    }
+                });
+                window.AppView = Backbone.View.extend({
+                    el: $('body'),
+                    initialize: function(){
+                        console.log('creating a list for friends');
+                        this.friends = new Friends(null, { view: this });
+                    },
+                    events: {
+                        'click #add-friend': 'showPrompt',
+                    },
+                    showPrompt: function() {
+                        var friend_name = prompt('Who is your friend?');
+                        console.log('creating new friend model: ' + friend_name);
+                        var friend_model = new Friend({ name: friend_name });
+                        console.log('adding friend ' + friend_model.get('name') + ' to list');
+                        this.friends.add(friend_model);
+                        console.log('friend added. Now we have ' + this.friends.length + ' friends');
+                    },
+                    addFriendLi: function(model){
+                        $('#friends-list').append('<li>' + model.get('name') + '</li>');
+                    }
+                });
+                var appview = new AppView();
+            })(jQuery);
+        </script>
+    </body>
+</html>
