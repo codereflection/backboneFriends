@@ -3,4 +3,12 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+    block scripts
+        script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js')
+        script(type='text/javascript', src='http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js')
+        script(type='text/javascript', src='http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js')
+  body
+    block content
+    block footer
+        #footer
+            p look, I can haz feets!
