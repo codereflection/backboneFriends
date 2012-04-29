@@ -23,6 +23,10 @@ block content
                 },
                 showPrompt: function() {
                     var friend_name = prompt('Who is your friend?');
+                    if (friend_name.length === 0) {
+                        alert('Name cannot be empty');
+                        return;
+                    }
                     console.log('creating new friend model: ' + friend_name);
                     var friend_model = new Friend({ name: friend_name });
                     console.log('adding friend ' + friend_model.get('name') + ' to list');
