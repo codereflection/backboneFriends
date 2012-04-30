@@ -21,5 +21,7 @@ exports.friends = function(req, res){
 };
 
 exports.saveFriends = function(req, res){
-  res.send('alrighty then, we have a new friend!');
+  friends.push({ name: req.body.name });
+  console.log('Adding new friend: ' + req.body.name);
+  res.send('alrighty then, we have a new friend named ' + req.body.name + '!');
 };
