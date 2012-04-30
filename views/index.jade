@@ -8,8 +8,15 @@ block content
                 name: null
             });
             Friends = Backbone.Collection.extend({
+                model: Friend,
+                url: '/friends',
                 initialize: function(models, options){
                     this.bind('add', options.view.addFriendLi);
+                    this.fetch({
+                            success: function(data, textStatus, jqXHR) {
+                                _.map(data.models, appview.addFriendLi);
+                            }
+                        });
                 }
             });
             window.AppView = Backbone.View.extend({
@@ -32,6 +39,7 @@ block content
                     console.log('adding friend ' + friend_model.get('name') + ' to list');
                     this.friends.add(friend_model);
                     console.log('friend added. Now we have ' + this.friends.length + ' friends');
+                    friend_model.save();
                 },
                 addFriendLi: function(model){
                     $('#friends-list').append('<li>' + model.get('name') + '</li>');
