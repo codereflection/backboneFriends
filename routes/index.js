@@ -4,7 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Friends List example using Node.js, express.js, jade, and Backbone' })
+  res.render('index', { title: 'Friends List example using Node.js, Express.js, Jade, and Backbone.js' })
 };
 
 var friends = [
