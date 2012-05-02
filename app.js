@@ -4,6 +4,8 @@
  */
 
 var express = require('express')
+  , _ = require("underscore")
+  , backbone = require("backbone")
   , routes = require('./routes');
 
 var app = module.exports = express.createServer();
