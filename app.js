@@ -4,9 +4,13 @@
  */
 
 var express = require('express')
-  , _ = require("underscore")
-  , backbone = require("backbone")
+  , models = require("./models/Models.js")
   , routes = require('./routes');
+
+var newFriend = new models.Friend({ name: "Freddy Farmer" });
+var friendList = new models.Friends();
+friendList.add(newFriend);
+console.log("We now have " + friendList.length + " friends.")
 
 var app = module.exports = express.createServer();
 
